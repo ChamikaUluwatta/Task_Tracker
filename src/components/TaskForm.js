@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./TaskForm.css";
 
 const TaskForm = (props) => {
   const [taskName, setTaskName] = useState("");
@@ -8,26 +7,6 @@ const TaskForm = (props) => {
   const [taskTime, setTaskTime] = useState("");
   const [taskDuration, setTaskDuration] = useState("");
 
-  const handleTaskNameChange = (event) => {
-    setTaskName(event.target.value);
-  }
-
-  const handleTaskDescriptionChange = (event) => {
-    setTaskDescription(event.target.value);
-  }
-
-  const handleTaskDateChange = (event) => {
-    setTaskDate(event.target.value);
-  }
-
-  const handleTaskTimeChange = (event) => {
-    setTaskTime(event.target.value);
-  }
-
-  const handleTaskDurationChange = (event) => {
-    setTaskDuration(event.target.value);
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const taskData = {
@@ -35,43 +14,57 @@ const TaskForm = (props) => {
       taskDescription: taskDescription,
       taskDate: taskDate,
       taskTime: taskTime,
-      taskDuration: taskDuration
-    }
+      taskDuration: taskDuration,
+    };
     props.onsubmitForm(taskData);
     setTaskDate("");
     setTaskDescription("");
     setTaskDuration("");
     setTaskName("");
     setTaskTime("");
-
-  }
-
-
+  };
 
   return (
-    <div className="TaskFormContainer">
-      <form className="TaskForm" onSubmit={handleSubmit}>
-        <label htmlFor="taskName">
-          Task Name
-          <input type="text" placeholder="Enter Here" onChange={handleTaskNameChange} required />
-        </label>
-        <label htmlFor="taskDescription">
-          Task Description
-          <textarea placeholder="Enter Here" onChange={handleTaskDescriptionChange} required />
-        </label>
-        <label htmlFor="taskDate" onChange={handleTaskDateChange}>
-          Task Date
-          <input type="date" required />
-        </label>
-        <label htmlFor="taskTime" onChange={handleTaskTimeChange}>
-          Task Start Time
-          <input type="time" required />
-        </label>
-        <label htmlFor="taskDuration" onChange={handleTaskDurationChange}>
-          Task Duration(/hr)
-          <input type="number" placeholder="Enter here" min="1" required />
-        </label>
-        <input type="submit" value="Add Task" />
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="flex justify-center items-center mt-6 flex-col">
+          <div class="z-0 w-1/4 mb-6 flex justify-center items-center">
+            <input
+              type="text"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+            />
+            <label
+              for="floating_task_name"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-6 -z-10 origin-center peer-focus:origin-center peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-2"
+            >
+              Task name
+            </label>
+          </div>
+          <div class="z-0 w-1/4 mb-6 mt-6 flex justify-center items-center">
+            <textarea
+              class="resize-y block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+            />
+            <label
+              for="floating_task_description"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-50 -z-10 origin-center peer-focus:origin-center peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-7  peer-focus:top-11"
+            >
+              Task description
+            </label>
+          </div>
+
+          
+        </div>
+
+        <button
+          type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-1/4 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

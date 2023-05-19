@@ -1,5 +1,4 @@
 import TaskForm from './TaskForm';
-import './NewTaskItem.css';
 
 const NewTaskItem = () => {
     const onSubmitFormHandler = (enteredData) => {
