@@ -1,7 +1,7 @@
 {
   "name": "to-do-web",
   "version": "0.1.0",
-  "homepage": "https://ChamikaUluwatta.github.io/Todo_web",
+  "homepage": "https://chamikauluwatta.github.io/Task_Tracker",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
