@@ -4,14 +4,19 @@ const NewTaskItem = (props) => {
     const onSubmitFormHandler = (enteredData) => {
         const todoData = {
             ...enteredData,
-            id: Math.random().toString()
+            taskId: Math.random().toString()
         }
         props.onAddTask(todoData);
+        props.onsubmitclose();
+    }
+
+    const onFormClose = () => {
+        props.onsubmitclose();
     }
 
     return(
         <div className="TaskItemContainer">
-            <TaskForm onsubmitForm = {onSubmitFormHandler}/>
+            <TaskForm onclose={onFormClose} onsubmitForm = {onSubmitFormHandler}/>
         </div>
     );
 }

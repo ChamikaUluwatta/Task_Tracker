@@ -1,9 +1,12 @@
 const TaskItem = (props) => {
-  console.log(props.items);
+
+const removeHandler = (event) => {
+  props.onRemove(event.target.id);
+};
+
   return (
     <div className="lg:flex items-center justify-center w-full">
       {props.items.map((task, index) => {
-        console.log(task);
         return (
         <div className="focus:outline-none lg:w-4/12 lg:mr-7 lg:mb-0 mb-7 bg-white dark:bg-white  p-6 shadow rounded">
           <div className="flex items-center border-b border-gray-200 dark:border-gray-700  pb-6">
@@ -21,7 +24,7 @@ const TaskItem = (props) => {
                 <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                   Start
                 </button>
-                <button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                <button onClick={removeHandler} id={task.taskId} className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
                   Remove
                 </button>
               </div>

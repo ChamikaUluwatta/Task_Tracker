@@ -28,7 +28,7 @@ function App() {
       EstimatedDuration: 160 
     },
     {
-      taskId : 4,
+      taskId : 5,
       taskName: "Data Analysis",
       taskDescription: "Analyze customer data to gain insights and identify opportunities for business growth. This includes collecting and cleaning data, performing statistical analysis, creating visualizations, and presenting findings to stakeholders.",
       StartDate: new Date("2023-09-01"),
@@ -37,6 +37,7 @@ function App() {
   ];
   
   const [tasks, setTasks] = useState(tasksItemList);
+  const [isEditing, setIsEditing] = useState(false);
 
   const addTaskHandler = (task) => {
     setTasks((prevTasks) => {
@@ -44,10 +45,27 @@ function App() {
     });
   }
 
+  const onEditing = () => {
+    setIsEditing(true);
+  }
+  
+  const offEditing = () => {
+    setIsEditing(false);
+  }
+
+  const removeTask = (taskId) => {
+    console.log("removeTask: " + taskId );
+    setTasks((prevTasks) => {
+      return prevTasks.filter((task) => task.taskId != taskId);
+    });
+    
+  }
+
   return (
     <div className="App">
-      <NewTaskItem onAddTask = {addTaskHandler} />
-      <TaskList tasks = {tasks} />
+      {!isEditing && <button className="bg-gray-700 w-1/4 mt-5 h-auto p-3 rounded-lg shadow-xl dark:shadow-gray-800 text-white " onClick={onEditing}>Add New Task</button>}
+      {isEditing && <NewTaskItem  onAddTask = {addTaskHandler} onsubmitclose={offEditing}/>}
+      <TaskList onRemoveTask={removeTask} tasks = {tasks} />
     </div>
   );
 }
