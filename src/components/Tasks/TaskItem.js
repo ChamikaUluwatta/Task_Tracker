@@ -4,6 +4,10 @@ const removeHandler = (event) => {
   props.onRemove(event.target.id);
 };
 
+const startTimerHandler = (event) => {
+  props.onstartTimer(event.target.id);
+}
+
   return (
     <div className="lg:flex items-center justify-center w-full">
       {props.items.map((task, index) => {
@@ -21,7 +25,7 @@ const removeHandler = (event) => {
                 role="img"
                 aria-label="bookmark"
               >
-                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                <button onClick={startTimerHandler} id={task.EstimatedDuration} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                   Start
                 </button>
                 <button onClick={removeHandler} id={task.taskId} className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">

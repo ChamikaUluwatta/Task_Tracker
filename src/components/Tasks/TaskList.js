@@ -7,8 +7,9 @@ const TaskList = (props) => {
     props.onRemoveTask(id);
   }
 
+
   return (
-    <div className="focus:outline-none py-8 w-full ">
+    <div className="focus:outline-none py-8 w-full  ">
       {props.tasks.map((task,index) => {
         tempArray.push(task);
 
@@ -16,7 +17,7 @@ const TaskList = (props) => {
           const items = [...tempArray]; // Create a copy of tempArray
           tempArray = []; // Reset tempArray
 
-          return <TaskItem onRemove={onTaskRemove} items={items} />;
+          return <TaskItem onstartTimer={props.onStartTime} onRemove={onTaskRemove} items={items} />;
         }
 
         return null;

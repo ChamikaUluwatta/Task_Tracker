@@ -1,6 +1,7 @@
 import './App.css';
 import NewTaskItem from './components/NewTask/NewTaskItem';
 import TaskList from './components/Tasks/TaskList';
+import Timer from './components/Timer/Timer';
 import { useState } from 'react';
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
   
   const [tasks, setTasks] = useState(tasksItemList);
   const [isEditing, setIsEditing] = useState(false);
+  const [estimatedDuration,setestimatedDuration] = useState(0);
+  const [isTimerStarted, setIsTimerStarted] = useState(false);
 
   const addTaskHandler = (task) => {
     setTasks((prevTasks) => {
@@ -53,6 +56,15 @@ function App() {
     setIsEditing(false);
   }
 
+  const startTimer = (estimatedDuration) => {
+    setestimatedDuration(estimatedDuration)
+    setIsTimerStarted(true);
+  }
+
+  const stopTimer = () => {
+    setIsTimerStarted(false);
+  }
+
   const removeTask = (taskId) => {
     console.log("removeTask: " + taskId );
     setTasks((prevTasks) => {
@@ -61,11 +73,16 @@ function App() {
     
   }
 
+  const onCloseTimer = () => {
+    setIsTimerStarted(false);
+  }
+
   return (
-    <div className="App">
-      {!isEditing && <button className="bg-gray-700 w-1/4 mt-5 h-auto p-3 rounded-lg shadow-xl dark:shadow-gray-800 text-white " onClick={onEditing}>Add New Task</button>}
-      {isEditing && <NewTaskItem  onAddTask = {addTaskHandler} onsubmitclose={offEditing}/>}
-      <TaskList onRemoveTask={removeTask} tasks = {tasks} />
+    <div className="App ">
+      {(!isEditing && !isTimerStarted ) && <button className="bg-gray-700 w-1/4 mt-5 h-auto p-3 rounded-lg shadow-xl dark:shadow-gray-800 text-white " onClick={onEditing}>Add New Task</button>}
+      {(isEditing && !isTimerStarted) && <NewTaskItem  onAddTask = {addTaskHandler} onsubmitclose={offEditing}/>}
+      {!isTimerStarted && <TaskList onStartTime={startTimer} onRemoveTask={removeTask} tasks = {tasks} />}
+      {isTimerStarted && <Timer onCloseTimer={onCloseTimer} duration={estimatedDuration} onStopTimer={stopTimer}/>}
     </div>
   );
 }
