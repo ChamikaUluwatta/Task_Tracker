@@ -92,7 +92,7 @@ const TaskForm = (props) => {
           <div className="flex flex-row h-10 rounded-lg relative bg-transparent mt-1 justify-center mb-4 w-1/4 items-center">
             <input
               type="number"
-              className=" bg-gray-50 border text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-grey-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="font-mono bg-gray-50 border text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-grey-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               min="1"
               value={taskDuration}
               onChange={handleTaskDurationChange}
