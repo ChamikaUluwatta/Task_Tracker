@@ -1,2 +1,2 @@
 # Task_Tracker
-React.js + Tailwind
+Technology Used :- MERN Stack
