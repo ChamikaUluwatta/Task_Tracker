@@ -3,6 +3,7 @@ import NewTaskItem from './components/NewTask/NewTaskItem';
 import TaskList from './components/Tasks/TaskList';
 import Timer from './components/Timer/Timer';
 import { useState } from 'react';
+import HomePage from './components/LoginPage/HomePage';
 
 function App() {
   
@@ -41,6 +42,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [estimatedDuration,setestimatedDuration] = useState(0);
   const [isTimerStarted, setIsTimerStarted] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const addTaskHandler = (task) => {
     setTasks((prevTasks) => {
@@ -77,12 +79,18 @@ function App() {
     setIsTimerStarted(false);
   }
 
+  const onLoginSuccefull = () => {
+    setIsLogin(true);
+  }
+
   return (
     <div className="App ">
-      {(!isEditing && !isTimerStarted ) && <button className="bg-gray-700 w-1/4 mt-5 h-auto p-3 rounded-lg shadow-xl dark:shadow-gray-800 text-white " onClick={onEditing}>Add New Task</button>}
+      {!isLogin && <HomePage onloginSuccefull={onLoginSuccefull}/>}
+      {isLogin && <>{(!isEditing && !isTimerStarted ) && <button className="bg-gray-700 w-1/4 mt-5 h-auto p-3 rounded-lg shadow-xl dark:shadow-gray-800 text-white " onClick={onEditing}>Add New Task</button>}
       {(isEditing && !isTimerStarted) && <NewTaskItem  onAddTask = {addTaskHandler} onsubmitclose={offEditing}/>}
       {!isTimerStarted && <TaskList onStartTime={startTimer} onRemoveTask={removeTask} tasks = {tasks} />}
-      {isTimerStarted && <Timer onCloseTimer={onCloseTimer} duration={estimatedDuration} onStopTimer={stopTimer}/>}
+      {isTimerStarted && <Timer onCloseTimer={onCloseTimer} duration={estimatedDuration} onStopTimer={stopTimer}/>}</>}
+      
     </div>
   );
 }
