@@ -23,6 +23,7 @@ export default function Login(props) {
       .then((data) => {
         if (data.token !== null) {
           props.onSuccefullLogin();
+          props.onHandleCookies(data.token);
         }
       });
   }
@@ -30,7 +31,7 @@ export default function Login(props) {
   return (
     <div className="justify-center flex h-screen place-items-center">
       <div className="w-1/4 ">
-        <form className="mt-10" onSubmit={handleSubmit}>
+        <form className="mt-10" onSubmit={handleSubmit} >
           <div class="relative z-0  mb-6 flex justify-center">
             <input
               type="email"

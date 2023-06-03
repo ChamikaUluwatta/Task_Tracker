@@ -12,7 +12,7 @@ const startTimerHandler = (event) => {
     <div className="lg:flex items-center justify-center w-full">
       {props.items.map((task, index) => {
         return (
-        <div className="focus:outline-none lg:w-4/12 lg:mr-7 lg:mb-0 mb-7 bg-white dark:bg-white  p-6 shadow rounded">
+        <div key={index} className="focus:outline-none lg:w-4/12 lg:mr-7 lg:mb-0 mb-7 mt-3 bg-white dark:bg-white  p-6 shadow rounded">
           <div className="flex items-center border-b border-gray-200 dark:border-gray-700  pb-6">
             <div className="flex items-start justify-between w-full">
               <div className="pl-3 w-full">
