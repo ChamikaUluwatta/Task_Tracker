@@ -21,7 +21,7 @@ export default function Login(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.token !== null) {
+        if (data.token !== null && data.token !== undefined && data.token !== "") {
           props.onSuccefullLogin();
           props.onHandleCookies(data.token);
         }
