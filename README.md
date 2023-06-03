@@ -8,6 +8,8 @@ Task Tracker is a web application designed to help users manage their tasks and 
 <code><img width="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React"/></code>
 <code><img width="50" src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" alt="Node.js" title="Node.js"/></code>
 
+# Screenshot
+![Screenshot 2023-06-03 234318](https://github.com/ChamikaUluwatta/Task_Tracker/assets/118790869/c659073f-d707-4aa9-aca6-2507ba49c6bb)
 
 ![ss1](https://github.com/ChamikaUluwatta/Task_Tracker/assets/118790869/3afa106e-465b-49c8-9744-77cf1de5a7f3)
 
