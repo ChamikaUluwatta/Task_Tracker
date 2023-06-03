@@ -44,7 +44,6 @@ const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", register);
-app.post("/tasks", verifyToken, createTask);
 
 /* ROUTES */
 app.use("/auth", authRoutes);

@@ -1,25 +1,25 @@
 import Task from "../models/Task.js";
 import User from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 /* CREATE */
 export const createTask = async (req, res) => {
   try {
-    const { userId, description, duration, taskName, date } = req.body;
-    const user = await User.findById(userId);
+    const { userId, taskDescription, taskDuration, taskName, taskDate } = req.body;
+    const userid = jwt.verify(userId, process.env.JWT_SECRET);
     const newTask = new Task({
-      userId,
-      firstName: user.firstName,
+      userId:userid.id,
       taskName: taskName,
-      description: description,
-      duration: duration,
-      date: date,
+      description: taskDescription,
+      duration: taskDuration,
+      date: taskDate,
     });
     await newTask.save();
 
-    const task = await Task.find({userId});
+    const task = await Task.find({ userId: userId.id });
     res.status(201).json(task);
   } catch (err) {
-    res.status(409).json({ message: err.message });
+    res.status(409).json({ message: err.message});
   }
 };
 
@@ -27,12 +27,31 @@ export const createTask = async (req, res) => {
 
 export const getUserTasks = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const task = await Task.find({ userId });
-    res.status(200).json(task);
+    const userId = jwt.verify(req.params.userId, process.env.JWT_SECRET);
+    const task = await Task.find({ userId: userId.id });
+    const filteredTasks = task.map(task => ({
+      id: task._id,
+      title: task.taskName,
+      description: task.description,
+      duration: task.duration,
+      date: task.date,
+    }));
+
+    res.status(200).json(filteredTasks);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
 
+/* DELETE */
+
+export const deleteTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Task.findByIdAndRemove(id);
+    res.json({ message: "Task deleted successfully." });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
 
