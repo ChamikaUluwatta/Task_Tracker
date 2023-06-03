@@ -7,7 +7,7 @@ export default function Login(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch("https://task-tracker-hiw0.onrender.com:10000/auth/login", {
+    fetch("https://task-tracker-hiw0.onrender.com/auth/login", {
       method: "POST",
       crossDomain: true,
       headers: {

@@ -22,7 +22,7 @@ function App() {
     setCookie("token", token, { path: "/" });
   };
   const getUsersTasks = async () => {
-    await fetch(`https://task-tracker-hiw0.onrender.com:10000/tasks/${cookie.token}/tasks`, {
+    await fetch(`https://task-tracker-hiw0.onrender.com/tasks/${cookie.token}/tasks`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function App() {
   };
   
   const deleteTask = async (taskId) => {
-    await fetch(`https://task-tracker-hiw0.onrender.com:10000/tasks/${taskId}`, {
+    await fetch(`https://task-tracker-hiw0.onrender.com/tasks/${taskId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

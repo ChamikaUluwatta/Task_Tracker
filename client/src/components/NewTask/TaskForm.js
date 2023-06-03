@@ -16,7 +16,7 @@ const TaskForm = (props) => {
       taskDuration: taskDuration,
     };
 
-    fetch(`https://task-tracker-hiw0.onrender.com:10000/tasks/create`, {
+    fetch(`https://task-tracker-hiw0.onrender.com/tasks/create`, {
       method: "POST",
       crossDomain: true,
       headers: {
