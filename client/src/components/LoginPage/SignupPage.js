@@ -39,7 +39,7 @@ function SignUp(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3005/auth/register", {
+    fetch("https://task-tracker-hiw0.onrender.com:10000/auth/register", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -65,7 +65,7 @@ function SignUp(props) {
           });
           console.log(data);
           sampleTaskList.map((task) => {
-            fetch(`http://localhost:3005/tasks/create`, {
+            fetch(`https://task-tracker-hiw0.onrender.com:10000/tasks/create`, {
               method: "POST",
               crossDomain: true,
               headers: {
