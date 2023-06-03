@@ -5,6 +5,7 @@ const TaskForm = (props) => {
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDate, setTaskDate] = useState("");
   const [taskDuration, setTaskDuration] = useState("1");
+  const userId = props.cookie.token;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,6 +15,25 @@ const TaskForm = (props) => {
       taskDate: new Date(taskDate),
       taskDuration: taskDuration,
     };
+
+    fetch(`http://localhost:3005/tasks/create`, {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${userId}`,
+      },body: JSON.stringify({
+        userId,
+        taskDescription,
+        taskDuration,
+        taskName,
+        taskDate,
+      }),
+    }).then((response) => {
+      console.log(response);
+    });
+    
     props.onsubmitForm(taskData);
     setTaskDate("");
     setTaskDescription("");
@@ -39,13 +59,13 @@ const TaskForm = (props) => {
 
   const formclose = () => {
     props.onclose();
-  }
+  };
 
   return (
     <div className="flex justify-center rounded-lg items-center mt-3">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-700 w-1/2 h-auto  rounded-lg shadow-xl dark:shadow-gray-800"
+        className="bg-gray-700 w-1/2 h-auto  rounded-lg  dark:shadow-gray-800"
       >
         <div className="flex justify-center items-center mt-6 flex-col bg-gray-650">
           <div className="z-0 w-1/4 mb-6 flex justify-center items-center bg-gray-700 ">
@@ -56,9 +76,7 @@ const TaskForm = (props) => {
               required
               onChange={handleTaskNameChange}
             />
-            <label
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-8 -z-10 origin-center peer-focus:origin-center peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-2"
-            >
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-8 -z-10 origin-center peer-focus:origin-center peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-2">
               Task name
             </label>
           </div>
@@ -69,9 +87,7 @@ const TaskForm = (props) => {
               onChange={handleTaskDescriptionChange}
               required
             />
-            <label
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-7 scale-75 top-55 -z-10 origin-center peer-focus:origin-center peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-12  peer-focus:top-11"
-            >
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-7 scale-75 top-55 -z-10 origin-center peer-focus:origin-center peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-12  peer-focus:top-11">
               Task description
             </label>
           </div>

@@ -1,6 +1,8 @@
 import TaskForm from './TaskForm';
 
 const NewTaskItem = (props) => {
+
+
     const onSubmitFormHandler = (enteredData) => {
         const todoData = {
             ...enteredData,
@@ -16,7 +18,7 @@ const NewTaskItem = (props) => {
 
     return(
         <div className="TaskItemContainer">
-            <TaskForm onclose={onFormClose} onsubmitForm = {onSubmitFormHandler}/>
+            <TaskForm onclose={onFormClose} onsubmitForm = {onSubmitFormHandler} cookie={props.cookie}/>
         </div>
     );
 }

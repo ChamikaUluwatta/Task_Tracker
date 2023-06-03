@@ -1,16 +1,44 @@
 import React, { useState } from "react";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 function SignUp(props) {
   const [firstName, setfirstName] = useState("");
   const [lastName, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const sampleTaskList = [
+    {
+      taskName: "Website Redesign (Sample)",
+      taskDescription:
+        "Revamp the company's website to improve user experience and enhance visual appeal. This involves updating the design, layout, and content of the website, optimizing it for mobile devices, and integrating new features such as a blog and social media integration.",
+      startDate: new Date("2023-01-01"),
+      EstimatedDuration: 336,
+    },
+    {
+      taskName: "Product Development (Sample)",
+      taskDescription:
+        "Develop a new product from ideation to launch. This includes conducting market research, creating product specifications, designing prototypes, testing and iterating, and coordinating with manufacturing partners for production.",
+      StartDate: new Date("2023-07-01"),
+      EstimatedDuration: 960,
+    },
+    {
+      taskName: "Marketing Campaign (Sample)",
+      taskDescription:
+        "Plan and execute a comprehensive marketing campaign to promote a new product release. This involves defining target audience, developing marketing materials, running digital and traditional advertising campaigns, and analyzing campaign performance.",
+      StartDate: new Date("2023-08-01"),
+      EstimatedDuration: 160,
+    },
+    {
+      taskName: "Data Analysis (Sample)",
+      taskDescription:
+        "Analyze customer data to gain insights and identify opportunities for business growth. This includes collecting and cleaning data, performing statistical analysis, creating visualizations, and presenting findings to stakeholders.",
+      StartDate: new Date("2023-09-01"),
+      EstimatedDuration: 240,
+    },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(firstName, lastName, email, password);
     fetch("http://localhost:3005/auth/register", {
       method: "POST",
       crossDomain: true,
@@ -27,7 +55,7 @@ function SignUp(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.status !== null) {
+        if (data.token !== null) {
           swal({
             title: "Succefully Registered!",
             icon: "success",
@@ -35,7 +63,31 @@ function SignUp(props) {
           }).then(() => {
             props.onHandleLogin();
           });
-          
+          console.log(data);
+          sampleTaskList.map((task) => {
+            fetch(`http://localhost:3005/tasks/create`, {
+              method: "POST",
+              crossDomain: true,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${data}`,
+              },
+              body: JSON.stringify({
+                userId: data,
+                taskDescription: task.taskDescription,
+                taskDuration: task.EstimatedDuration,
+                taskName: task.taskName,
+                taskDate: task.StartDate,
+              }),
+            })
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          });
         }
       });
   };
@@ -119,13 +171,13 @@ function SignUp(props) {
             SignUp
           </button>
           <div className="flex justify-end">
-          <button
-            type="button"
-            onClick={props.onHandleLogin}
-            class="py-2.5 px-5 mr-2 mb-2 mt-5 text-sm font-medium text-white-900 focus:outline-none bg-grey-200 rounded-lg border border-gray-200 hover:bg-gray-100  focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-200 hover:bg-slate-400 dark:bg-gray-200  dark:border-gray-200  "
-          >
-            <span className="underline-offset-3 underline">Login ?</span>
-          </button>
+            <button
+              type="button"
+              onClick={props.onHandleLogin}
+              class="py-2.5 px-5 mr-2 mb-2 mt-5 text-sm font-medium text-white-900 focus:outline-none bg-grey-200 rounded-lg border border-gray-200 hover:bg-gray-100  focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-200 hover:bg-slate-400 dark:bg-gray-200  dark:border-gray-200  "
+            >
+              <span className="underline-offset-3 underline">Login ?</span>
+            </button>
           </div>
         </form>
       </div>
